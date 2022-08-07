@@ -1,0 +1,102 @@
+* {
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
+}
+
+button, input[type="submit"] {
+  width: auto;
+  padding: .5em;
+  background-color: #c07759;
+  border: 1px solid #c07759;
+  color: white;
+  font-size: 14px;
+  letter-spacing: 1px;
+}
+
+button:hover, input[type="submit"]:hover {
+  cursor: pointer;
+}
+
+.select-servers {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  padding: 1rem;
+  background-color: #2f3437;
+  display: grid;
+  grid-template-columns: 15% 70% 15%;
+  grid-template-rows: auto;
+  grid-template-areas: "serv-title servers servsel-btn";
+  justify-items: center;
+  align-items: center;
+}
+
+.selserv-btn {
+  grid-area: servsel-btn;
+  font-size: .9rem;
+}
+
+.servers {
+  grid-area: servers;
+  width: 100%;
+  margin: 1em;
+  display: grid;
+  gap: 1.5em;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  grid-template-rows: auto;
+  align-items: center;
+  justify-items: center;
+}
+
+.checkbox input[type="checkbox"] {
+  display: none;
+}
+
+.checkbox label {
+  display: block;
+  padding: .5em;
+  width: 125px;
+  border: 1px solid #c07759;
+  border-radius: 20px;
+  text-align: center;
+  color: #c07759;
+  font-size: .9rem;
+}
+
+.checkbox label:hover {
+  border: 1px solid #a7421b;
+  color: #a7421b;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.checkbox input[type="checkbox"]:checked + label {
+  border: 1px solid #a7421b;
+  color: #a7421b;
+  font-weight: 500;
+}
+
+#assign-servers {
+  display: block;
+  width: 145px;
+}
+
+.server {
+  padding: .5em;
+  width: 125px;
+  border: 1px solid #a7421b;
+  border-radius: 20px;
+  color: #a7421b;
+  font-size: .9rem;
+  font-weight: 500;
+  text-align: center;
+}
+
+.selserv-title {
+  grid-area: serv-title;
+  color: white;
+  justify-self: left;
+  padding-left: .5em;
+}

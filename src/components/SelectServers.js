@@ -23,20 +23,23 @@ const SelectServers = ({ setActiveServers, setIsSelServClicked }) => {
   }
 
   return(
-    <form className="select-servers" onSubmit={handleSelectServersSubmit}>
-      {servers && servers.map(server => (
-        <div key={server.name}>
-          <input
-            type="checkbox"
-            id={server.name}
-            name="active-servers"
-            value={server.name}
-          />
-          <label htmlFor={server.name}>{server.name}</label>
-        </div>
-      ))}
-      <input type="submit" value="Assign Servers" />
-    </form>
+    // <div className="servers-container">
+      <form className="servers" onSubmit={handleSelectServersSubmit}>
+        {servers && servers.map(server => (
+          <div className="checkbox" key={server.name}>
+            <input
+              className="server-box"
+              type="checkbox"
+              id={server.name}
+              name="active-servers"
+              value={server.name}
+            />
+            <label htmlFor={server.name}>{server.name}</label>
+          </div>
+        ))}
+        <input id="assign-servers" type="submit" value="Assign Servers" />
+      </form>
+    // </div>
   )
 }
 

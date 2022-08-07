@@ -18,17 +18,22 @@ const MozzQueue = () => {
   }
 
   return (
-    <div>
+    <div className='select-servers'>
       {isSelServClicked ?
         <SelectServers
           setActiveServers={setActiveServers}
           setIsSelServClicked={setIsSelServClicked}
-        /> : null
+        /> : 
+        <button className='selserv-btn' onClick={handleSelServClick}>
+          Select Active Servers
+        </button>
       }
-      <h3>Active Servers</h3>
-      {activeServers.map(s => <div key={s}>{s}</div>)}
+      <h3 className='selserv-title'>Active Servers</h3>
+      <div className='servers'>
+        {activeServers.map(s => <div className='server' key={s}>{s}</div>)}
+      </div>
 
-      <button onClick={handleSelServClick}>Select Active Servers</button>
+      
     </div>
   )
 }
