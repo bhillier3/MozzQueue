@@ -9,7 +9,7 @@ const SignOut = ({ setIsSignedIn }) => {
   }
 
   return(
-    <button className="signout" onClick={handleSubmit}>SignOut</button>
+    <button className="signout" onClick={handleSubmit}>Sign Out</button>
   )
 }
 

@@ -18,27 +18,126 @@ button:hover, input[type="submit"]:hover {
   cursor: pointer;
 }
 
+.login-container { 
+  position: absolute;
+  width: 100%;
+  padding-left: 40vw;
+  padding-top: 17vh;
+}
+
+.login-title {
+  margin-bottom: 3vh;
+  letter-spacing: 1px;
+  color: #9a2b00;
+}
+
+.login-form {
+  width: 20vw;
+  display: block;
+}
+
+.input-container {
+  margin-bottom: 0.5em;
+}
+
+.input-container > input {
+  height: 1.5em;
+  width: 80%;
+  position: relative;
+  /* CENTER POSITION */
+}
+
+#login-submit {
+  position: relative;
+  width: 50%;
+  font-size: 1rem;
+  /* CENTER POSITION */
+}
+
+.signout {
+  position: fixed;
+  top: 0;
+  right: 0;
+  margin-top: 2px;
+  margin-right: 0.5rem;
+  border: none;
+  background-color: #2f3437;
+  color:#a7421b;
+  text-decoration: underline;
+  font-size: 0.6rem;
+  z-index: 1;
+}
+
 .select-servers {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   padding: 1rem;
+  padding-top: 1.6rem;
   background-color: #2f3437;
   display: grid;
   grid-template-columns: 15% 70% 15%;
   grid-template-rows: auto;
-  grid-template-areas: "serv-title servers servsel-btn";
+  grid-template-areas: "serv-title servers selserv-btn";
   justify-items: center;
   align-items: center;
 }
 
-.selserv-btn {
-  grid-area: servsel-btn;
+.server-btn {
+  display: block;
+  padding: .5em;
+  width: 160px;
+  border: 1px solid #c07759;
+  border-radius: 20px;
+  text-align: center;
+  color: #c07759;
+  background-color: #2f3437;
   font-size: .9rem;
 }
 
-.servers {
+.server-btn:hover {
+  border: 1px solid #a7421b;
+  color: #a7421b;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.checked-btn {
+  border: 1px solid #a7421b;
+  color: #a7421b;
+  font-weight: 500;
+}
+
+#assign-servers {
+  display: block;
+  width: 145px;
+}
+
+.active-servers {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  padding: 1rem;
+  padding-top: 1.6rem;
+  background-color: #2f3437;
+  display: grid;
+  grid-template-columns: 15% 70% 15%;
+  grid-template-rows: auto;
+  grid-template-areas: "serv-title servers selserv-btn";
+  justify-items: center;
+  align-items: center;
+}
+
+.selserv-title {
+  grid-area: serv-title;
+  color: white;
+  justify-self: left;
+  padding-left: .5em;
+}
+
+.servers-container {
   grid-area: servers;
   width: 100%;
   margin: 1em;
@@ -48,39 +147,6 @@ button:hover, input[type="submit"]:hover {
   grid-template-rows: auto;
   align-items: center;
   justify-items: center;
-}
-
-.checkbox input[type="checkbox"] {
-  display: none;
-}
-
-.checkbox label {
-  display: block;
-  padding: .5em;
-  width: 125px;
-  border: 1px solid #c07759;
-  border-radius: 20px;
-  text-align: center;
-  color: #c07759;
-  font-size: .9rem;
-}
-
-.checkbox label:hover {
-  border: 1px solid #a7421b;
-  color: #a7421b;
-  font-weight: 500;
-  cursor: pointer;
-}
-
-.checkbox input[type="checkbox"]:checked + label {
-  border: 1px solid #a7421b;
-  color: #a7421b;
-  font-weight: 500;
-}
-
-#assign-servers {
-  display: block;
-  width: 145px;
 }
 
 .server {
@@ -94,9 +160,7 @@ button:hover, input[type="submit"]:hover {
   text-align: center;
 }
 
-.selserv-title {
-  grid-area: serv-title;
-  color: white;
-  justify-self: left;
-  padding-left: .5em;
+.selserv-btn {
+  grid-area: selserv-btn;
+  font-size: .9rem;
 }
