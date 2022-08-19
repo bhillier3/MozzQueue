@@ -1,45 +1,53 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import firebase from '../firebase'
+import SelectServerBtn from './SelectServerBtn'
 
 import { useCollectionDataOnce } from 'react-firebase-hooks/firestore'
+import { query, collection, orderBy, onSnapshot } from 'firebase/firestore'
 
 const db = firebase.firestore()
 
-const SelectServers = ({ setActiveServers, setIsSelServClicked }) => {
+const SelectServers = ({ setIsSelServClicked }) => {
 
-  const serversRef = db.collection('servers')
-  const serverQuery = serversRef.orderBy('name')
+  const [servers, setServers] = useState([])
 
-  const [servers] = useCollectionDataOnce(serverQuery)
+  useEffect(() => {
+    loadServers()
+  }, [])
 
-  const handleSelectServersSubmit = e => {
+  const loadServers = async() => {
+    const serversQueryRef = query(collection(db, 'servers'), orderBy('name'))
+    await onSnapshot(serversQueryRef, (snapshot) => {
+      setServers(snapshot.docs.map(doc => ({
+        id: doc.id,
+        data: doc.data()
+      })))
+    })
+  }
+
+  const handleSelectServersSubmit = (e) => {
     e.preventDefault()
 
-    const checked = e.target.querySelectorAll('[name="active-servers"]:checked')
-    const selected = Array.from(checked).map(server => server.value)
-
-    setActiveServers(selected)
     setIsSelServClicked(false)
   }
 
   return(
-    // <div className="servers-container">
-      <form className="servers" onSubmit={handleSelectServersSubmit}>
-        {servers && servers.map(server => (
-          <div className="checkbox" key={server.name}>
-            <input
-              className="server-box"
-              type="checkbox"
-              id={server.name}
-              name="active-servers"
-              value={server.name}
-            />
-            <label htmlFor={server.name}>{server.name}</label>
-          </div>
-        ))}
-        <input id="assign-servers" type="submit" value="Assign Servers" />
-      </form>
-    // </div>
+    <div className="servers-container">
+      {servers.map(server => (
+        <SelectServerBtn
+          key={server.id}
+          id={server.id}
+          name={server.data.name}
+          active={server.data.active}
+          // setActiveStatus={setActiveStatus()}
+        />
+      ))}
+      <button
+        className='assign-servers'
+        onClick={handleSelectServersSubmit}>
+        Assign Servers
+      </button>
+    </div>
   )
 }
 

@@ -24,8 +24,9 @@ const SignIn = ({ setIsSignedIn }) => {
   const renderErrorMsg = () => <div className="error">{errorMsg}</div>
 
   const renderLoginForm = () => (
-    <div className="login-form">
-      <form onSubmit={handleSubmit}>
+    <div className="login-container">
+      <h2 className="login-title">Lazia Mozzarella Cart</h2>
+      <form className="login-form" onSubmit={handleSubmit}>
         <div className="input-container">
           <label htmlFor="uname">Username:</label>
           <input ref={unameRef} type="text" name="uname" required />
@@ -34,7 +35,7 @@ const SignIn = ({ setIsSignedIn }) => {
           <label htmlFor="password">Password:</label>
           <input ref={passRef} type="password" name="password" required />
         </div>
-        <input type="submit" />
+        <input id="login-submit" type="submit" value="Login" />
         {renderErrorMsg()}
       </form>
     </div>

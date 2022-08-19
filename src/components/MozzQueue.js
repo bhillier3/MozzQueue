@@ -1,7 +1,8 @@
-import React, { useState } from 'react'
-import firebase from '../firebase'
+import React, { useState, useEffect } from 'react'
 import SelectServers from './SelectServers'
+import firebase from '../firebase'
 
+import { query, collection, orderBy, onSnapshot, where } from 'firebase/firestore'
 import { useCollectionData } from 'react-firebase-hooks/firestore'
 
 const db = firebase.firestore()
@@ -10,28 +11,50 @@ const MozzQueue = () => {
   const [isSelServClicked, setIsSelServClicked] = useState(false)
   const [activeServers, setActiveServers] = useState([])
 
+  useEffect(() => {
+    const activeServerQueryRef = query(
+      collection(db, 'servers'),
+      where('active', '==', true), orderBy('name')
+    )
+    onSnapshot(activeServerQueryRef, (snapshot) => {
+      setActiveServers(snapshot.docs.map(doc => ({
+        id: doc.id,
+        data: doc.data()
+      })))
+    })
+  })
+
   const handleSelServClick = e => {
     e.preventDefault()
 
-    setActiveServers([])
     setIsSelServClicked(true)
   }
 
   return (
-    <div className='select-servers'>
-      {isSelServClicked ?
-        <SelectServers
-          setActiveServers={setActiveServers}
-          setIsSelServClicked={setIsSelServClicked}
-        /> : 
-        <button className='selserv-btn' onClick={handleSelServClick}>
-          Select Active Servers
-        </button>
-      }
-      <h3 className='selserv-title'>Active Servers</h3>
-      <div className='servers'>
-        {activeServers.map(s => <div className='server' key={s}>{s}</div>)}
-      </div>
+    <div className='mozzq-container'>
+      {isSelServClicked ? (
+        <div className='select-servers'>
+          <SelectServers
+            setIsSelServClicked={setIsSelServClicked}
+          />
+        </div>
+        ) : (
+        <div className='active-servers'>
+          <h3 className='selserv-title'>Active Servers</h3>
+          <div className='servers-container'>
+            {activeServers.map(server => 
+              <div 
+                className='server'
+                key={server.id}>
+                {server.data.name}
+              </div>
+            )}
+          </div>
+          <button className='selserv-btn' onClick={handleSelServClick}>
+            Select Active Servers
+          </button>
+        </div>
+      )}
 
       
     </div>
