@@ -13,7 +13,7 @@ const MozzEntry = ({ id, data }) => {
       setIsStarted(snapshot.data().isStarted)
       setIsComplete(snapshot.data().isComplete)
     })
-  })
+  }, [setIsStarted, setIsComplete])
 
   const handleFireClick = async() => {
     await updateDoc(doc(db, 'mozzqueue', id), {

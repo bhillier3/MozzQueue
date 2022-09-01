@@ -40,7 +40,8 @@ const MozzQueue = () => {
         data: doc.data()
       })))
     })
-  })
+    console.log('found sumbission and update')
+  }, [setActiveServers, setMozzqueue])
 
   const handleSelServClick = e => {
     e.preventDefault()
