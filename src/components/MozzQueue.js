@@ -1,23 +1,41 @@
 import React, { useState, useEffect } from 'react'
-import SelectServers from './SelectServers'
 import firebase from '../firebase'
+import AddToQueueBtn from './AddToQueueBtn'
+import MozzEntry from './MozzEntry'
+import MozzForm from './MozzForm'
+import SelectServers from './SelectServers'
 
 import { query, collection, orderBy, onSnapshot, where } from 'firebase/firestore'
-import { useCollectionData } from 'react-firebase-hooks/firestore'
 
 const db = firebase.firestore()
 
 const MozzQueue = () => {
   const [isSelServClicked, setIsSelServClicked] = useState(false)
   const [activeServers, setActiveServers] = useState([])
+  const [mozzqueue, setMozzqueue] = useState([])
+  const [popped, setPopped] = useState(false)
 
+  /*
+    BUG: Delay on select server to display, maybe make async here can fix
+    -- Was mainly seen/caused by slow computer, but it should wait if its slow
+  */
   useEffect(() => {
     const activeServerQueryRef = query(
       collection(db, 'servers'),
       where('active', '==', true), orderBy('name')
     )
+    const mozzqueueQueryRef = query(
+      collection(db, 'mozzqueue'), orderBy('entry_time')
+    )
+
     onSnapshot(activeServerQueryRef, (snapshot) => {
       setActiveServers(snapshot.docs.map(doc => ({
+        id: doc.id,
+        data: doc.data()
+      })))
+    })
+    onSnapshot(mozzqueueQueryRef, (snapshot) => {
+      setMozzqueue(snapshot.docs.map(doc => ({
         id: doc.id,
         data: doc.data()
       })))
@@ -28,6 +46,10 @@ const MozzQueue = () => {
     e.preventDefault()
 
     setIsSelServClicked(true)
+  }
+
+  const togglePop = () => {
+    setPopped(!popped)
   }
 
   return (
@@ -56,7 +78,18 @@ const MozzQueue = () => {
         </div>
       )}
 
-      
+      <div className='queue-container'>
+        {mozzqueue.map(entry =>
+          <MozzEntry key={entry.id} id={entry.id} data={entry.data} />
+        )}
+        <AddToQueueBtn togglePop={togglePop}/>
+      </div>
+
+      {popped ? <MozzForm 
+        togglePop={togglePop}
+        servers={activeServers}
+        /> : null
+      }
     </div>
   )
 }

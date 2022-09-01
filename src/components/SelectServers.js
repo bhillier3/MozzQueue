@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react'
 import firebase from '../firebase'
 import SelectServerBtn from './SelectServerBtn'
 
-import { useCollectionDataOnce } from 'react-firebase-hooks/firestore'
 import { query, collection, orderBy, onSnapshot } from 'firebase/firestore'
 
 const db = firebase.firestore()

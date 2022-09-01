@@ -2,6 +2,7 @@
   margin: 0;
   padding: 0;
   font-family: sans-serif;
+  background-color: #e2e2e0;
 }
 
 button, input[type="submit"] {
@@ -18,6 +19,24 @@ button:hover, input[type="submit"]:hover {
   cursor: pointer;
 }
 
+input[type='number']::-webkit-inner-spin-button,
+input[type='number']::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+h4 {
+  background-color: #2f3437;
+  color: #5c7e87;
+  font-weight: 400;
+  font-size: 1.1em;
+}
+
+.mozzq-container {
+  display: block;
+  width: 100%;
+}
+
 .login-container { 
   position: absolute;
   width: 100%;
@@ -28,7 +47,7 @@ button:hover, input[type="submit"]:hover {
 .login-title {
   margin-bottom: 3vh;
   letter-spacing: 1px;
-  color: #9a2b00;
+  color: #89111a;
 }
 
 .login-form {
@@ -62,7 +81,7 @@ button:hover, input[type="submit"]:hover {
   margin-right: 0.5rem;
   border: none;
   background-color: #2f3437;
-  color:#a7421b;
+  color: #89111a;
   text-decoration: underline;
   font-size: 0.6rem;
   z-index: 1;
@@ -97,15 +116,15 @@ button:hover, input[type="submit"]:hover {
 }
 
 .server-btn:hover {
-  border: 1px solid #a7421b;
-  color: #a7421b;
+  border: 1px solid #89111a;
+  color: #89111a;
   font-weight: 500;
   cursor: pointer;
 }
 
 .checked-btn {
-  border: 1px solid #a7421b;
-  color: #a7421b;
+  border: 1px solid #89111a;
+  color: #89111a;
   font-weight: 500;
 }
 
@@ -115,9 +134,9 @@ button:hover, input[type="submit"]:hover {
 }
 
 .active-servers {
-  position: fixed;
-  top: 0;
-  left: 0;
+  /* position: fixed; */
+  /* top: 0;
+  left: 0; */
   width: 100%;
   padding: 1rem;
   padding-top: 1.6rem;
@@ -132,6 +151,7 @@ button:hover, input[type="submit"]:hover {
 
 .selserv-title {
   grid-area: serv-title;
+  background-color: #2f3437;
   color: white;
   justify-self: left;
   padding-left: .5em;
@@ -141,6 +161,7 @@ button:hover, input[type="submit"]:hover {
   grid-area: servers;
   width: 100%;
   margin: 1em;
+  background-color: #2f3437;
   display: grid;
   gap: 1.5em;
   grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
@@ -152,9 +173,10 @@ button:hover, input[type="submit"]:hover {
 .server {
   padding: .5em;
   width: 125px;
-  border: 1px solid #a7421b;
+  border: 1px solid #89111a;
   border-radius: 20px;
-  color: #a7421b;
+  background-color: #2f3437;
+  color: #89111a;
   font-size: .9rem;
   font-weight: 500;
   text-align: center;
@@ -163,4 +185,211 @@ button:hover, input[type="submit"]:hover {
 .selserv-btn {
   grid-area: selserv-btn;
   font-size: .9rem;
+}
+
+.queue-container {
+  display: block;
+  box-sizing: border-box;
+  margin: 1em;
+}
+
+/* MozzEntry Styles */
+.mozz-entry-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr 3fr 1fr 1fr 1fr;
+  justify-items: center;
+  box-sizing: border-box;
+  width: 100%;
+  margin-bottom: 1em;
+  padding: 1em;
+  background-color: #dadada;
+  border-style: solid;
+  border-color: #89111a;
+  border-width: 1px;
+  border-radius: 8px;
+}
+
+.entry-box {
+  background-color: #dadada;
+}
+
+.entry-label {
+  display: block;
+  box-sizing: border-box;
+  background-color: #dadada;
+  font-weight: 600;
+  font-size: 1.2em;
+  color: #2f3437;
+  text-align: center;
+}
+
+.entry-data {
+  display: block;
+  box-sizing: border-box;
+  background-color: #dadada;
+  margin-top: .25em;
+  font-weight: 600;
+  color: #c07759;
+  text-align: center;
+}
+
+.entry-btn {
+  background-color: #5c7e87;
+  border-color: #5c7e87;
+}
+
+.add-btn {
+  display: block;
+  width: 100%;
+  padding: .25em;
+  background-color: #e2e2e0;
+  border-color: #5c7e87;
+  border-width: 2px;
+  color: #5c7e87;
+  font-size: 1.5em;
+}
+
+.add-btn:hover {
+  background-color: #5c7e87;
+  color: white;
+}
+
+/* MozzForm Popout */
+.popped-modal {
+  position: fixed;
+  background-color: rgba(0, 0, 0, 0.5);
+  width: 100%;
+  height: 100vh;
+  top: 0;
+  left: 0;
+  margin: 0;
+}
+
+.mozzform-container {
+  position: relative;
+  width: 50%;
+  height: 50vh;
+  margin-top: 25vh;
+  margin-left: 25%;
+  background-color: #2f3437;
+  padding: 1em;
+}
+
+.closeIcon {
+  cursor: pointer;
+  position: absolute;
+  top: 0;
+  right: 0;
+  background-color: #2f3437;
+  color: #c07759;
+  font-size: 1.5em;
+  padding: .2em;
+}
+
+.form-grid {
+  position: relative;
+  width: 100%;
+  height: 90%;
+  margin-top: 1em;
+  /* padding: 1em; */
+  display: grid;
+  grid-template-columns: 3fr 1fr;
+  grid-template-rows: 3fr 3fr 1fr;
+  grid-template-areas: 
+    "servers tablenum"
+    "notes notes"
+    "submit submit";
+  background-color: #2f3437;
+  box-sizing: border-box;
+}
+
+.form-servers {
+  position: relative;
+  grid-area: servers;
+  background-color: #2f3437;
+}
+
+.form-servers-box {
+  margin-top: .5em;
+  background-color: #2f3437;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  grid-template-rows: auto;
+  gap: .5em;
+  justify-items: center;
+}
+
+.form-tablenum {
+  grid-area: tablenum;
+  background-color: #2f3437;
+  position: relative;
+  width: 100%;
+  display: flex;
+  flex-flow: column wrap;
+  align-items: center;
+}
+
+.table {
+  width: 2em;
+  height: 2em;
+  margin-top: .5em;
+  background-color: #e2e2e0;
+  border-style: inset;
+  border-color: #2f3437;
+  color: #2f3437;
+  font-weight: 600;
+  font-size: 1.5em;
+  text-align: center;
+}
+
+.form-notes {
+  grid-area: notes;
+  background-color: #2f3437;
+  margin-top: .5em;
+}
+
+.notes {
+  width: 100%;
+  height: 70%;
+  margin-top: .5em;
+  box-sizing: border-box;
+  background-color: #e2e2e0;
+  color: #2f3437;
+  font-size: 1.1em;
+  resize: none;
+}
+
+.errMsg {
+  color: #89111a;
+  background-color: #2f3437;
+}
+
+.form-submit {
+  grid-area: submit;
+}
+
+.form-title {
+  background-color: #2f3437;
+  color: #89111a;
+  font-size: 1.3em;
+  font-weight: 600;
+  width: fit-content;
+  margin: 0 auto;
+}
+
+.form-heading {
+  width: fit-content;
+  margin: 0 auto;
+}
+
+#form-btn:hover {
+  background-color: #c07759;
+  color: white;
+  border-color: #c07759;
+}
+
+.selected-btn {
+  background-color: #c07759;
+  color: white;
+  border-color: #c07759;
 }
