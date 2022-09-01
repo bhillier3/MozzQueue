@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import firebase from '../firebase'
 
-import { doc, updateDoc, onSnapshot, Timestamp } from 'firebase/firestore'
+import { doc, updateDoc, onSnapshot, deleteDoc, Timestamp } from 'firebase/firestore'
 const db = firebase.firestore()
 
 const MozzEntry = ({ id, data }) => {
@@ -27,9 +27,16 @@ const MozzEntry = ({ id, data }) => {
       isComplete: true
     })
   }
+  const handleDelete = async() => {
+    await deleteDoc(doc(db, 'mozzqueue', id))
+  }
 
   return(
-    <div className='mozz-entry-container'>
+    <div className={
+      `mozz-entry-container
+      ${isStarted && !isComplete && 'active-entry'}
+      ${isComplete && 'complete-entry'}`
+    }>
       <div className='entry-box'>
         <div className='entry-label'>Server</div>
         <div className='entry-data'>{data.server}</div>
@@ -61,17 +68,18 @@ const MozzEntry = ({ id, data }) => {
       </div>
       <div className='entry-box'>
         <div className='entry-label'>Finish Time</div>
-        <div className='entry-data'>
+        <div className={`entry-data ${isComplete && 'finish-time'}`}>
           {isStarted ?
             (isComplete ?
               data.finish_time.toDate().toLocaleTimeString('en-US') :
               <button className='entry-btn' onClick={handleFinishClick}>
-                Finish
+                Done
               </button>
             ) : '--:--:--'
           }
         </div>
       </div>
+      <button className='delete-btn' onClick={handleDelete}>Delete</button>
     </div>
   )
 }
